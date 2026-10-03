@@ -1,0 +1,6 @@
+{
+  "name": "MOZAIK Natural Stone Collection",
+  "description": "Premium natural stone, mosaic stone, pebbles, gravel, and architectural decorative stone crafted for modern architecture, landscape, and interior design.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

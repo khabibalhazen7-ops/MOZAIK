@@ -1,0 +1,149 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Natural stone and mosaic product specification",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 200 },
+        "slug": { "type": "string", "maxLength": 200, "pattern": "^[a-z0-9-]+$" },
+        "category": { "type": "string", "maxLength": 100 },
+        "shortDescription": { "type": "string", "maxLength": 500 },
+        "description": { "type": "string", "maxLength": 5000 },
+        "material": { "type": "string", "maxLength": 150 },
+        "color": { "type": "string", "maxLength": 100 },
+        "size": { "type": "string", "maxLength": 100 },
+        "finish": { "type": "string", "maxLength": 100 },
+        "applications": { "type": "array", "description": "Applicable areas like Pool, Wall, Garden" },
+        "minimumOrder": { "type": "string", "maxLength": 100 },
+        "availability": { "type": "string", "maxLength": 100 },
+        "featured": { "type": "boolean" },
+        "mainImage": { "type": "string", "maxLength": 1000 },
+        "galleryImages": { "type": "array", "description": "Additional gallery URLs" },
+        "seoTitle": { "type": "string", "maxLength": 200 },
+        "seoDescription": { "type": "string", "maxLength": 500 },
+        "seoKeywords": { "type": "string", "maxLength": 300 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "slug", "category", "shortDescription", "mainImage"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Category for natural stone collection",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 100 },
+        "slug": { "type": "string", "maxLength": 100, "pattern": "^[a-z0-9-]+$" },
+        "description": { "type": "string", "maxLength": 1000 },
+        "image": { "type": "string", "maxLength": 1000 },
+        "order": { "type": "number" }
+      },
+      "required": ["name", "slug"]
+    },
+    "GalleryItem": {
+      "title": "GalleryItem",
+      "description": "Inspiration gallery photo with category",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 200 },
+        "category": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 1000 },
+        "image": { "type": "string", "maxLength": 1000 },
+        "altText": { "type": "string", "maxLength": 200 },
+        "featured": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "category", "image"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "Completed architectural or landscaping project portfolio",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 200 },
+        "slug": { "type": "string", "maxLength": 200, "pattern": "^[a-z0-9-]+$" },
+        "location": { "type": "string", "maxLength": 150 },
+        "year": { "type": "string", "maxLength": 20 },
+        "category": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 5000 },
+        "productsUsed": { "type": "string", "maxLength": 300 },
+        "coverImage": { "type": "string", "maxLength": 1000 },
+        "galleryImages": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "slug", "coverImage"]
+    },
+    "Inquiry": {
+      "title": "Inquiry",
+      "description": "Customer Request a Quote / Inquiry lead",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 150 },
+        "company": { "type": "string", "maxLength": 150 },
+        "email": { "type": "string", "maxLength": 150 },
+        "phone": { "type": "string", "maxLength": 50 },
+        "projectType": { "type": "string", "maxLength": 100 },
+        "productInterest": { "type": "string", "maxLength": 150 },
+        "message": { "type": "string", "maxLength": 3000 },
+        "status": { "type": "string", "enum": ["New", "Contacted", "Quoted", "Completed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "message"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "Brand contact and global site configuration",
+      "type": "object",
+      "properties": {
+        "siteName": { "type": "string", "maxLength": 100 },
+        "tagline": { "type": "string", "maxLength": 200 },
+        "email": { "type": "string", "maxLength": 150 },
+        "whatsapp": { "type": "string", "maxLength": 50 },
+        "phone": { "type": "string", "maxLength": 50 },
+        "address": { "type": "string", "maxLength": 300 },
+        "businessHours": { "type": "string", "maxLength": 200 }
+      }
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Registered administrator",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "maxLength": 150 },
+        "role": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Collection of natural stone products"
+    },
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "Stone categories"
+    },
+    "/gallery/{galleryId}": {
+      "schema": "GalleryItem",
+      "description": "Inspiration photo gallery items"
+    },
+    "/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Architectural and landscape projects"
+    },
+    "/inquiries/{inquiryId}": {
+      "schema": "Inquiry",
+      "description": "Quote requests and inquiries from visitors"
+    },
+    "/settings/{settingId}": {
+      "schema": "Settings",
+      "description": "Site contact and info settings"
+    },
+    "/admins/{adminId}": {
+      "schema": "Admin",
+      "description": "Admin authorization documents"
+    }
+  }
+}
